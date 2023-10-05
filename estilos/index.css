@@ -1,0 +1,125 @@
+body{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #e5e5f7;
+    background-image:  linear-gradient(30deg, #aaacd2 12%, transparent 12.5%, transparent 87%, #aaacd2 87.5%, #aaacd2), linear-gradient(150deg, #aaacd2 12%, transparent 12.5%, transparent 87%, #aaacd2 87.5%, #aaacd2), linear-gradient(30deg, #aaacd2 12%, transparent 12.5%, transparent 87%, #aaacd2 87.5%, #aaacd2), linear-gradient(150deg, #aaacd2 12%, transparent 12.5%, transparent 87%, #aaacd2 87.5%, #aaacd2), linear-gradient(60deg, #aaacd277 25%, transparent 25.5%, transparent 75%, #aaacd277 75%, #aaacd277), linear-gradient(60deg, #aaacd277 25%, transparent 25.5%, transparent 75%, #aaacd277 75%, #aaacd277);
+    background-size: 44px 77px;
+    background-position: 0 0, 0 0, 22px 39px, 22px 39px, 0 0, 22px 39px;
+
+}
+
+header{
+    background-color: rgba(222, 79, 105,0.92);
+    padding: 18px;
+    width: 500px;
+    z-index: 100;
+    border: crimson 5px solid;
+    border-radius: 0 0 25px 25px;
+    text-align: center;
+    -webkit-animation-name: tada;
+    animation-name: tada;
+    -webkit-animation-duration: 1s;
+    animation-duration: 1s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+}
+
+
+
+article:nth-child(odd){
+    -webkit-animation-name: fadeInLeft;
+    animation-name: fadeInLeft;
+    -webkit-animation-duration: 1s;
+    animation-duration: 1s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+}
+
+article:nth-child(even){
+    -webkit-animation-name: fadeInRight;
+    animation-name: fadeInRight;
+    -webkit-animation-duration: 1s;
+    animation-duration: 1s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+}
+
+@-webkit-keyframes tada {
+    0% {
+        -webkit-transform: scale3d(1, 1, 1);
+        transform: scale3d(1, 1, 1);
+    }
+    10%, 20% {
+        -webkit-transform: scale3d(.9, .9, .9) rotate3d(0, 0, 1, -3deg);
+        transform: scale3d(.9, .9, .9) rotate3d(0, 0, 1, -3deg);
+    }
+    30%, 50%, 70%, 90% {
+        -webkit-transform: scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, 3deg);
+        transform: scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, 3deg);
+    }
+    40%, 60%, 80% {
+        -webkit-transform: scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, -3deg);
+        transform: scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, -3deg);
+    }
+    100% {
+        -webkit-transform: scale3d(1, 1, 1);
+        transform: scale3d(1, 1, 1);
+    }
+}
+@keyframes tada {
+    0% {
+        -webkit-transform: scale3d(1, 1, 1);
+        transform: scale3d(1, 1, 1);
+    }
+    10%, 20% {
+        -webkit-transform: scale3d(.9, .9, .9) rotate3d(0, 0, 1, -3deg);
+        transform: scale3d(.9, .9, .9) rotate3d(0, 0, 1, -3deg);
+    }
+    30%, 50%, 70%, 90% {
+        -webkit-transform: scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, 3deg);
+        transform: scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, 3deg);
+    }
+    40%, 60%, 80% {
+        -webkit-transform: scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, -3deg);
+        transform: scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, -3deg);
+    }
+    100% {
+        -webkit-transform: scale3d(1, 1, 1);
+        transform: scale3d(1, 1, 1);
+    }
+}
+
+p{
+    font-size: 18px;
+}
+span{
+    font-weight: bold;
+    display: inline-block;
+    color: #fffd00;
+    text-decoration: #fffd00 underline;
+}
+
+span:hover{
+    -webkit-animation-name: gomita;
+    animation-name: gomita;
+    -webkit-animation-duration: 1s;
+    animation-duration: 1s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+    color: #7b00ff;
+    text-decoration: #7b00ff overline underline;
+
+}
+
+
+article{
+    background-color: rgba(206, 182, 187, 0.92);
+    padding: 18px;
+    border: #606060 5px solid;
+    border-radius:25px;
+    text-align: center;
+    margin: 10px 0 10px 0;
+    overflow-wrap: anywhere;
+    width: 500px;
+}
