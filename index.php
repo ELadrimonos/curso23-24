@@ -29,6 +29,9 @@ $any = "2004";
         <p><a href="./ejercicios4/ley_dhondt/ley.php">Ley d'Hont</a></p>
         <p><a href="./Redirecciones/ejercicio1/formulario.php">Redirección 1</a></p>
         <p><a href="./Redirecciones/ejercicio2/formulario.php">Redirección 2</a></p>
+        <p><a href="./ejercicios6/preferencias/preferencias.php">Preferencias Cookies</a></p>
+        <p><a href="./ejercicios6/ficheros/ficheros.php">Contador fichero</a></p>
+        <p><a href="./ejercicios6/carro/carro.php">Sesión Carrito Compra</a></p>
     </article>
 
     <article>

@@ -24,11 +24,11 @@ function add_to_carrito($identificador) : void{
     }
 }
 
-if (isset($_REQUEST["anyadir"])){
-    add_to_carrito(intval($_REQUEST["anyadir"]));
+if (isset($_POST["anyadir"])){
+    add_to_carrito(intval($_POST["anyadir"]));
 }
 
-if (isset($_REQUEST["cerrar"])){
+if (isset($_POST["cerrar"])){
     session_destroy();
     header("Location: carro.php"); // Redirige a la página para que se actualice
     exit();
@@ -41,12 +41,15 @@ if (isset($_REQUEST["cerrar"])){
     <meta charset="UTF-8">
     <title></title>
     <link rel="stylesheet" type="text/css" href="/curso23-24/estilos/principal.css">
+    <link rel="stylesheet" type="text/css" href="./estiloCarro.css">
 </head>
 <body>
 <main>
+    <header>
     <?php
-        echo "Total: " . $_SESSION["carrito"]["total"] . "€";
-        echo "<br>Productos: <br>";
+        echo "<h1>Total: <span>" . $_SESSION["carrito"]["total"] . "€</span></h1>";
+        echo "<br><h1>Productos:</h1></header><br>";
+        echo "<section class='productos'>";
         foreach ($_SESSION["carrito"]["items"] as $index => $item) {
             echo $item;
             if ($_SESSION["carrito"]["cantidad"][intval($index)] > 1){
@@ -57,6 +60,7 @@ if (isset($_REQUEST["cerrar"])){
 
             echo "<br>";
         }
+        echo "</section>";
     ?>
     <form action="carro.php" method="post">
         <button name="anyadir" value="0">Zapatillas Nike (60 euros)</button>
