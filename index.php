@@ -32,6 +32,7 @@ $any = "2004";
         <p><a href="./ejercicios6/preferencias/preferencias.php">Preferencias Cookies</a></p>
         <p><a href="./ejercicios6/ficheros/ficheros.php">Contador fichero</a></p>
         <p><a href="./ejercicios6/carro/carro.php">Sesión Carrito Compra</a></p>
+        <p><a href="./ejercicios6/login/index.php">Sesión Usuarios</a></p>
     </article>
 
     <article>

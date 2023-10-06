@@ -8,6 +8,12 @@ $articulos = array(
     array("id" => 4, "nombre" => "Pelota de baloncesto Molten", "precio" => 20)
 );
 
+
+if (isset($_POST["cerrar"])){
+    unset($_SESSION["carrito"]);
+    session_destroy();
+}
+
 if (!isset($_SESSION['carrito'])) $_SESSION['carrito'] = ["total" => 0, "items" => [], "cantidad" => []];
 
 function add_to_carrito($identificador) : void{
@@ -28,11 +34,6 @@ if (isset($_POST["anyadir"])){
     add_to_carrito(intval($_POST["anyadir"]));
 }
 
-if (isset($_POST["cerrar"])){
-    session_destroy();
-    header("Location: carro.php"); // Redirige a la página para que se actualice
-    exit();
-}
 ?>
 
 <!DOCTYPE html>
@@ -45,10 +46,18 @@ if (isset($_POST["cerrar"])){
 </head>
 <body>
 <main>
-    <header>
     <?php
-        echo "<h1>Total: <span>" . $_SESSION["carrito"]["total"] . "€</span></h1>";
-        echo "<br><h1>Productos:</h1></header><br>";
+    echo "<header><h1>Total: <span>" . $_SESSION["carrito"]["total"] . "€</span></h1></header>";
+    ?>
+        <form action="carro.php" method="post">
+        <button name="anyadir" value="0">Zapatillas Nike (60 euros)</button>
+        <button name="anyadir" value="1">Sudadera Domyos (15 euros)</button>
+        <button name="anyadir" value="2">Pala de pádel Vairo (50 euros)</button>
+        <button name="anyadir" value="3">Pelota de baloncesto Molten (20 euros)</button>
+        <button name="cerrar" value="true">Vaciar carro</button>
+    </form>
+        <?php
+        echo "<footer><h1>Productos añadidos:</h1></footer>";
         echo "<section class='productos'>";
         foreach ($_SESSION["carrito"]["items"] as $index => $item) {
             echo $item;
@@ -61,14 +70,7 @@ if (isset($_POST["cerrar"])){
             echo "<br>";
         }
         echo "</section>";
-    ?>
-    <form action="carro.php" method="post">
-        <button name="anyadir" value="0">Zapatillas Nike (60 euros)</button>
-        <button name="anyadir" value="1">Sudadera Domyos (15 euros)</button>
-        <button name="anyadir" value="2">Pala de pádel Vairo (50 euros)</button>
-        <button name="anyadir" value="3">Pelota de baloncesto Molten (20 euros)</button>
-        <button name="cerrar" value="true">Vaciar carro</button>
-    </form>
+        ?>
 </main>
 </body>
 </html>
