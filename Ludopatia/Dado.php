@@ -4,6 +4,7 @@ class Dado
 {
     private $caras;
     private $min = 1;
+    private $max = 6;
 
     public function getCaras()
     {
@@ -12,7 +13,7 @@ class Dado
 
     public function setCaras($caras): void
     {
-        if ($caras > 1 && $caras < 7) $this->caras = $caras;
+        if ($caras > $this->min && $caras <= $this->max) $this->caras = $caras;
     }
 
     public function __construct($fcaras = 6){
