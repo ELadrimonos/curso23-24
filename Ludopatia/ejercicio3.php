@@ -8,12 +8,12 @@
         div{
             display: flex;
             flex-direction: row;
-            height: 100%;
-            width: 20vw;
+            height: auto;
+            width: auto;
         }
         img{
             aspect-ratio: 2/1;
-            width: 10vw;
+            width: 17vh;
         }
     </style>
 </head>
@@ -32,8 +32,9 @@ include "Carta.php";
         $resultados[$i] = $carta->tirarDado();
         echo "<img src='./IMG/p" . $resultados[$i] . ".svg' alt='Resultado ". $i ."'>";
     }
+    echo "</div>";
+    echo "<p>La carta más alta es un " . max($resultados) . " y la carta más baja es un " . min($resultados);
 ?>
-</div>
 </body>
 </html>
 

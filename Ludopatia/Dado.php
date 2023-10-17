@@ -4,7 +4,6 @@ class Dado
 {
     private $caras;
     private $min = 1;
-    private $max = 6;
 
     public function getCaras()
     {
@@ -13,7 +12,7 @@ class Dado
 
     public function setCaras($caras): void
     {
-        if ($caras > $this->min && $caras <= $this->max) $this->caras = $caras;
+        if ($caras > $this->getMin()) $this->caras = $caras;
     }
 
     public function __construct($fcaras = 6){
@@ -22,5 +21,11 @@ class Dado
 
     public function tirarDado(){
         return rand($this->min,$this->caras);
+    }
+
+
+    public function getMin(): int
+    {
+        return $this->min;
     }
 }
