@@ -7,9 +7,9 @@ class Moto extends Terrestre
     private $puertas;
     private $encencido;
 
-    public function __construct($nombre,$puertas = 2)
+    public function __construct($nombre,$kms,$puertas = 2)
     {
-        parent::__construct($nombre);
+        parent::__construct($nombre,$kms);
         $this->puertas = $puertas;
         $this->Encender();
     }

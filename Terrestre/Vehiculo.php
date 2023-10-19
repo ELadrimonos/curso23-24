@@ -9,9 +9,11 @@ abstract class Vehiculo
     public static int $kmTotales = 0;
     public int $km = 0;
 
-    public function __construct($nombre)
+    public function __construct($nombre, $kms)
     {
         self::$totalVehiculosCreados++;
+        $this->km = $kms;
+        self::$kmTotales += $kms;
         echo "<h3>------ OTRAS CARACTERISTICAS DE UN " . strtoupper(get_class($this)) . " ------</h3>";
         $this->nombre = $nombre;
 //        echo "<p>" . strtoupper($this->nombre) . " ARRANCANDO" . "</p>";
@@ -25,8 +27,6 @@ abstract class Vehiculo
     {
         if ($this->velocidad + $valor <= $this->velocidadMaxima){
             $this->velocidad += $valor;
-            $this->km += $valor;
-            self::$kmTotales += $valor;
             echo "<p>" . ucfirst($this->nombre) . " corriendo a " . $this->velocidad . "km/h (aumentando velocidad)</p>";
         } else $this->velocidad = $this->velocidadMaxima;
     }

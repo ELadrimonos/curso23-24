@@ -18,7 +18,7 @@ include "Carro.php";
 include "Moto.php";
 include "Bici.php";
 
-$vehiculos[] = new Carro("Matias El Coche Volador");
+$vehiculos[] = new Carro("Matias El Coche Volador", 300);
 
 
 $vehiculos[0]->aumentarVelocidad(50);
@@ -31,7 +31,7 @@ $vehiculos[0]->disminuirVelocidad(5);
 $vehiculos[0]->Frenar();
 $vehiculos[0]->Apagar();
 
-$vehiculos[] = new Carro("Juan Carlos El Primo Del Coche Volador");
+$vehiculos[] = new Carro("Juan Carlos El Primo Del Coche Volador",500);
 
 $vehiculos[1]->aumentarVelocidad(50);
 $vehiculos[1]->disminuirVelocidad(30);
@@ -43,7 +43,7 @@ $vehiculos[1]->disminuirVelocidad(5);
 $vehiculos[1]->Frenar();
 $vehiculos[1]->Apagar();
 
-$vehiculos[] = new Moto("Pablo Motos");
+$vehiculos[] = new Moto("Pablo Motos",200);
 
 $vehiculos[2]->aumentarVelocidad(50);
 $vehiculos[2]->disminuirVelocidad(30);
@@ -55,7 +55,7 @@ $vehiculos[2]->disminuirVelocidad(5);
 $vehiculos[2]->Frenar();
 $vehiculos[2]->Apagar();
 
-$vehiculos[] = new Bici("Usain Bolt");
+$vehiculos[] = new Bici("Usain Bolt",100);
 
 $vehiculos[3]->aumentarVelocidad(50);
 $vehiculos[3]->disminuirVelocidad(30);

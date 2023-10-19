@@ -7,9 +7,9 @@ class Carro extends Terrestre
     private $puertas;
     private $encencido;
 
-    public function __construct($nombre,$puertas = 5)
+    public function __construct($nombre,$kms,$puertas = 5)
     {
-        parent::__construct($nombre);
+        parent::__construct($nombre,$kms);
         $this->puertas = $puertas;
         $this->Encender();
     }

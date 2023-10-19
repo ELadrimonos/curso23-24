@@ -7,9 +7,9 @@ class Bici extends Terrestre
 {
     private $pedaleando;
 
-    public function __construct($nombre)
+    public function __construct($nombre,$kms)
     {
-        parent::__construct($nombre);
+        parent::__construct($nombre,$kms);
         $this->VelocidadMaxima(40);
         $this->Empezar_A_Pedalear();
     }
@@ -24,8 +24,6 @@ class Bici extends Terrestre
     public function Empezar_A_Pedalear(){
         if (!$this->pedaleando){
             $this->pedaleando = true;
-
-
             echo "<p>" . strtoupper(get_class($this) . " " . $this->nombre) . " ARRANCADA</p>";
         }
     }

@@ -5,9 +5,9 @@ include_once "Vehiculo.php";
 class Terrestre extends Vehiculo
 {
 
-    public function __construct($nombre)
+    public function __construct($nombre,$kms)
     {
-        parent::__construct($nombre);
+        parent::__construct($nombre,$kms);
     }
 
     public function __destruct(){
