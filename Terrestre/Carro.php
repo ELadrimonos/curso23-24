@@ -25,6 +25,8 @@ class Carro extends Terrestre
             $this->encencido = false;
             $this->disminuirVelocidad($this->getVelocidad());
             echo "<p>" . strtoupper(get_class($this) . " " . $this->nombre) . " APAGADO</p>";
+            echo "KM Totales: " . $this->km;
+
         }
     }
 

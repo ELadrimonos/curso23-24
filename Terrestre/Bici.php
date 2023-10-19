@@ -34,6 +34,7 @@ class Bici extends Terrestre
             $this->pedaleando = false;
             echo "<p>" . strtoupper(get_class($this) . " " . $this->nombre) . " HA PARADO DE PEDALEAR</p>";
             $this->Frenar();
+            echo "KM Totales: " . $this->km;
         }
     }
 }

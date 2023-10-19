@@ -18,46 +18,56 @@ include "Carro.php";
 include "Moto.php";
 include "Bici.php";
 
-$c1 = new Carro("Matias El Coche Volador");
-$c1->aumentarVelocidad(50);
-$c1->disminuirVelocidad(30);
-$c1->PasarBache();
-$c1->disminuirVelocidad(5);
-$c1->disminuirVelocidad(5);
-$c1->disminuirVelocidad(5);
-$c1->disminuirVelocidad(5);
-$c1->Frenar();
-$c1->Apagar();
-$c2 = new Carro("Juan Carlos El Primo Del Coche Volador");
-$c2->aumentarVelocidad(50);
-$c2->disminuirVelocidad(30);
-$c2->PasarBache();
-$c2->disminuirVelocidad(5);
-$c2->disminuirVelocidad(5);
-$c2->disminuirVelocidad(5);
-$c2->disminuirVelocidad(5);
-$c2->Frenar();
-$c2->Apagar();
-$m1 = new Moto("Pablo Motos");
-$m1->aumentarVelocidad(50);
-$m1->disminuirVelocidad(30);
-$m1->PasarBache();
-$m1->disminuirVelocidad(5);
-$m1->disminuirVelocidad(5);
-$m1->disminuirVelocidad(5);
-$m1->disminuirVelocidad(5);
-$m1->Frenar();
-$m1->Apagar();
-$b1 = new Bici("Usain Bolt");
-$b1->aumentarVelocidad(50);
-$b1->disminuirVelocidad(30);
-$b1->PasarBache();
-$b1->disminuirVelocidad(5);
-$b1->disminuirVelocidad(5);
-$b1->disminuirVelocidad(5);
-$b1->disminuirVelocidad(5);
-$b1->Frenar();
-$b1->Parar_De_Pedalear();
+$vehiculos[] = new Carro("Matias El Coche Volador");
+
+
+$vehiculos[0]->aumentarVelocidad(50);
+$vehiculos[0]->disminuirVelocidad(30);
+$vehiculos[0]->PasarBache();
+$vehiculos[0]->disminuirVelocidad(5);
+$vehiculos[0]->disminuirVelocidad(5);
+$vehiculos[0]->disminuirVelocidad(5);
+$vehiculos[0]->disminuirVelocidad(5);
+$vehiculos[0]->Frenar();
+$vehiculos[0]->Apagar();
+
+$vehiculos[] = new Carro("Juan Carlos El Primo Del Coche Volador");
+
+$vehiculos[1]->aumentarVelocidad(50);
+$vehiculos[1]->disminuirVelocidad(30);
+$vehiculos[1]->PasarBache();
+$vehiculos[1]->disminuirVelocidad(5);
+$vehiculos[1]->disminuirVelocidad(5);
+$vehiculos[1]->disminuirVelocidad(5);
+$vehiculos[1]->disminuirVelocidad(5);
+$vehiculos[1]->Frenar();
+$vehiculos[1]->Apagar();
+
+$vehiculos[] = new Moto("Pablo Motos");
+
+$vehiculos[2]->aumentarVelocidad(50);
+$vehiculos[2]->disminuirVelocidad(30);
+$vehiculos[2]->PasarBache();
+$vehiculos[2]->disminuirVelocidad(5);
+$vehiculos[2]->disminuirVelocidad(5);
+$vehiculos[2]->disminuirVelocidad(5);
+$vehiculos[2]->disminuirVelocidad(5);
+$vehiculos[2]->Frenar();
+$vehiculos[2]->Apagar();
+
+$vehiculos[] = new Bici("Usain Bolt");
+
+$vehiculos[3]->aumentarVelocidad(50);
+$vehiculos[3]->disminuirVelocidad(30);
+$vehiculos[3]->PasarBache();
+$vehiculos[3]->disminuirVelocidad(5);
+$vehiculos[3]->disminuirVelocidad(5);
+$vehiculos[3]->disminuirVelocidad(5);
+$vehiculos[3]->disminuirVelocidad(5);
+$vehiculos[3]->Frenar();
+$vehiculos[3]->Parar_De_Pedalear();
+
+echo "<h1>KM Totales entre todos: " . Vehiculo::$kmTotales . ". Vehiculos creados: " . Vehiculo::$totalVehiculosCreados .".</h1>";
 ?>
 </body>
 </html>
