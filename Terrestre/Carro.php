@@ -7,17 +7,19 @@ class Carro extends Terrestre
     private $puertas;
     private $encencido;
 
-    public function __construct($nombre,$kms,$puertas = 5)
+    public function __construct($nombre,$marca,$modelo,$kms,$puertas = 5)
     {
-        parent::__construct($nombre,$kms);
+        parent::__construct($nombre,$marca,$modelo,$kms);
         $this->puertas = $puertas;
-        $this->Encender();
+//        $this->Encender();
     }
 
     public function Encender(){
         if (!$this->encencido){
             $this->encencido = true;
+            echo "<h3>------ OTRAS CARACTERISTICAS DE UN " . strtoupper(get_class($this)) . " ------</h3>";
             echo "<p>" . strtoupper(get_class($this). " " . $this->nombre) . " ENCENDIDO</p>";
+            echo "<p>Marca: $this->Marca \t Modelo: $this->Modelo";
         }
     }
     public function Apagar(){

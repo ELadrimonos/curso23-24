@@ -8,67 +8,83 @@
         p{
             font-size: 0.89rem;
         }
+        body{
+            background: #cbc6c6;
+        }
+        form{
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+            align-items: end;
+            background: #b8b8f3;
+            border-radius: 25px;
+            border: black 10px dashed;
+            padding: 10px;
+            font-family: sans-serif;
+        }
+        a{
+            font-family: sans-serif;
+        }
+        input,select{
+            text-align: end;
+            margin-left: 10px;
+            border: darkblue solid 2px;
+            border-radius: 5px;
+            background: #c4c4d7;
+            transition: 300ms;
+        }
+        input:hover, select:hover{
+            background: #f5f5ff;
+        }
+
+        input:focus, select:focus{
+            background: #a6e8dc;
+        }
+        input[type="submit"]:hover, select:hover{
+            font-weight: bold;
+            outline: #3c074d 7px solid;
+            outline-offset: 3px;
+            border-radius: 0;
+        }
+        main{
+            text-align: center;
+            border-top: 5px dashed black;
+            margin-top: 10px;
+            background: white;
+            padding: 30px;
+            border-radius: 25px;
+        }
     </style>
 </head>
 <body>
+<?php include "formulario.php"?>
+<main>
 <h1>Vehículos</h1>
 <?php
-
-include "Carro.php";
-include "Moto.php";
-include "Bici.php";
-
-$vehiculos[] = new Carro("Matias El Coche Volador", 300);
-
-
-$vehiculos[0]->aumentarVelocidad(50);
-$vehiculos[0]->disminuirVelocidad(30);
-$vehiculos[0]->PasarBache();
-$vehiculos[0]->disminuirVelocidad(5);
-$vehiculos[0]->disminuirVelocidad(5);
-$vehiculos[0]->disminuirVelocidad(5);
-$vehiculos[0]->disminuirVelocidad(5);
-$vehiculos[0]->Frenar();
-$vehiculos[0]->Apagar();
-
-$vehiculos[] = new Carro("Juan Carlos El Primo Del Coche Volador",500);
-
-$vehiculos[1]->aumentarVelocidad(50);
-$vehiculos[1]->disminuirVelocidad(30);
-$vehiculos[1]->PasarBache();
-$vehiculos[1]->disminuirVelocidad(5);
-$vehiculos[1]->disminuirVelocidad(5);
-$vehiculos[1]->disminuirVelocidad(5);
-$vehiculos[1]->disminuirVelocidad(5);
-$vehiculos[1]->Frenar();
-$vehiculos[1]->Apagar();
-
-$vehiculos[] = new Moto("Pablo Motos",200);
-
-$vehiculos[2]->aumentarVelocidad(50);
-$vehiculos[2]->disminuirVelocidad(30);
-$vehiculos[2]->PasarBache();
-$vehiculos[2]->disminuirVelocidad(5);
-$vehiculos[2]->disminuirVelocidad(5);
-$vehiculos[2]->disminuirVelocidad(5);
-$vehiculos[2]->disminuirVelocidad(5);
-$vehiculos[2]->Frenar();
-$vehiculos[2]->Apagar();
-
-$vehiculos[] = new Bici("Usain Bolt",100);
-
-$vehiculos[3]->aumentarVelocidad(50);
-$vehiculos[3]->disminuirVelocidad(30);
-$vehiculos[3]->PasarBache();
-$vehiculos[3]->disminuirVelocidad(5);
-$vehiculos[3]->disminuirVelocidad(5);
-$vehiculos[3]->disminuirVelocidad(5);
-$vehiculos[3]->disminuirVelocidad(5);
-$vehiculos[3]->Frenar();
-$vehiculos[3]->Parar_De_Pedalear();
-
-echo "<h1>KM Totales entre todos: " . Vehiculo::$kmTotales . ". Vehiculos creados: " . Vehiculo::$totalVehiculosCreados .".</h1>";
+if (empty($_SESSION["kmTotales"]) && empty($_SESSION["vehiculosCreados"]) && empty($_SESSION["vehiculos"])){
+        $_SESSION["kmTotales"] = 0 ;
+        $_SESSION["vehiculosCreados"] = 0;
+        echo "Ningún Vehiculo en la lista";
+} else {
+    $vehiculos = $_SESSION["vehiculos"];
+    Vehiculo::$kmTotales = $_SESSION["kmTotales"];
+    Vehiculo::$totalVehiculosCreados = $_SESSION["vehiculosCreados"];
+    echo "<h1>KM Totales entre todos: " . Vehiculo::$kmTotales . ". Vehículos creados: " . Vehiculo::$totalVehiculosCreados . ".</h1>";
+    foreach ($vehiculos as $vehiculo) {
+        if (get_class($vehiculo) === "Bici") $vehiculo->Empezar_A_Pedalear();
+        else $vehiculo->Encender();
+        $vehiculo->aumentarVelocidad(50);
+        $vehiculo->disminuirVelocidad(30);
+        $vehiculo->PasarBache();
+        $vehiculo->disminuirVelocidad(5);
+        $vehiculo->disminuirVelocidad(5);
+        $vehiculo->disminuirVelocidad(5);
+        if (get_class($vehiculo) === "Bici") $vehiculo->Parar_De_Pedalear();
+        else $vehiculo->Apagar();
+    }
+}
 ?>
+</main>
 </body>
 </html>
 

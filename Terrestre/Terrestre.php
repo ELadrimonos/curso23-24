@@ -2,17 +2,26 @@
 
 include_once "Vehiculo.php";
 
-class Terrestre extends Vehiculo
+abstract class Terrestre extends Vehiculo
 {
 
-    public function __construct($nombre,$kms)
+    public string $Marca, $Modelo;
+    public function __construct($nombre,$marca,$modelo,$kms)
     {
         parent::__construct($nombre,$kms);
+        $this->Marca = $marca;
+        $this->Modelo = $modelo;
     }
 
     public function __destruct(){
         parent::__destruct();
         $this->Frenar();
+    }
+    public function aumentarVelocidad($valor){
+        if ($this->velocidad + $valor <= $this->velocidadMaxima){
+            $this->velocidad += $valor;
+            echo "<p>" . ucfirst($this->nombre) . " corriendo a " . $this->velocidad . "km/h (aumentando velocidad)</p>";
+        } else $this->velocidad = $this->velocidadMaxima;
     }
 
     public function disminuirVelocidad($valor): void
