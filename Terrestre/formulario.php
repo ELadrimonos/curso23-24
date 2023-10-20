@@ -14,7 +14,7 @@ if (isset($_POST["tipoVehiculo"]) && isset($_POST["kilometros"]) && isset($_POST
         case 2: $vehiculo  = new Bici($_POST["nombre"],$_POST["marca"],$_POST["modelo"],intval($_POST["kilometros"]));break;
     }
     $_SESSION["vehiculos"][] = $vehiculo;
-    if (empty($_SESSION["kmTotales"]) && $_SESSION["vehiculosCreados"]){
+    if (empty($_SESSION["kmTotales"]) && empty($_SESSION["vehiculosCreados"])){
         $_SESSION["kmTotales"] = 0 ;
         $_SESSION["vehiculosCreados"] = 0;
     }
