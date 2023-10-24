@@ -1,0 +1,86 @@
+#tele{
+    width: 700px;
+    aspect-ratio: 2/1.1;
+    background: black;
+    color: white;
+    text-align: center;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    font-family: sans-serif;
+}
+
+#pantalla{
+    width: 550px;
+    aspect-ratio: 2/1;
+    background: #abdcda;
+    position: absolute;
+    left: 75px;
+    top: 35px;
+}
+
+#Mando > form{
+    width: 120px;
+    aspect-ratio: 1/2;
+    background: dimgrey;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    position: relative;
+}
+#Mando >form>div{
+    display: flex;
+    flex-direction: column;
+    height: 70px;
+    width: 35px;
+}
+#Mando input{
+    width: 30px;
+    aspect-ratio: 1/1;
+    border: none;
+}
+#Mando input:nth-child(1){
+    border-bottom: 1px solid black;
+}
+
+
+#Apagado{
+    position: absolute;
+    width: 30px;
+    aspect-ratio: 1/1;
+    background: red;
+    color: #4d0707;
+    font-weight: bold;
+    left: 5px;
+    top: 5px;
+}
+
+input[type="range"]{
+    width: 75%;
+    margin: auto;
+    margin-top: 70px;
+    /*background-color: #7272dd;*/
+
+}
+
+input[type="range"]::-webkit-slider-runnable-track,input[type="range"]::-moz-range-track {
+    border-radius: 8rem;
+    height: 3rem;
+    background-color: #afafd0;
+    background-image: linear-gradient(to right, #414472, #2c2d4b 20px, #acacd2 20px, #bbbbe1);
+    background-size: 40px 100%;
+}
+
+input[type="range"]::-webkit-slider-thumb,input[type="range"]::-moz-range-thumb {
+    /*-webkit-appearance: none;*/
+    appearance: none;
+    margin-top: -56px;
+    background-color: #000000;
+    border-radius: 7.5rem;
+    height: 7.5rem;
+    width: 1.4rem;
+
+}
+
