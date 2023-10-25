@@ -9,6 +9,7 @@
     flex-direction: column;
     justify-content: end;
     font-family: sans-serif;
+    font-size: 0.7rem;
 }
 
 #pantalla{
@@ -20,13 +21,18 @@
     top: 35px;
 }
 
+#Mando{
+    margin-top: 30px;
+}
+
 #Mando > form{
     width: 120px;
     aspect-ratio: 1/2;
     background: dimgrey;
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: space-between;
+    padding: 0 5px 0 5px;
     align-items: center;
     position: relative;
 }
@@ -34,15 +40,20 @@
     display: flex;
     flex-direction: column;
     height: 70px;
+    padding-top: 15px;
     width: 35px;
 }
 #Mando input{
     width: 30px;
-    aspect-ratio: 1/1;
+    aspect-ratio: 1/1.2;
     border: none;
 }
-#Mando input:nth-child(1){
+#Mando >form>div> input:first-child{
     border-bottom: 1px solid black;
+    border-radius: 45% 45% 0 0;
+}
+#Mando >form>div>input:last-child{
+    border-radius: 0 0 45% 45%;
 }
 
 
@@ -53,8 +64,14 @@
     background: red;
     color: #4d0707;
     font-weight: bold;
+    border-radius: 0;
+    padding: 0;
     left: 5px;
     top: 5px;
+}
+
+#Apagado:hover{
+    background: #ff5050;
 }
 
 input[type="range"]{
