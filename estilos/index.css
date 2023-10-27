@@ -109,6 +109,7 @@ span:hover{
     animation-fill-mode: both;
     color: #7b00ff;
     text-decoration: #7b00ff overline underline;
+    cursor: default;
 
 }
 
