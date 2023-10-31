@@ -77,14 +77,15 @@
     <input type="submit">
 </form>
 <?php
-global$pdo;
 ini_set('display_errors', 1); ini_set('display_startup_errors', 1); error_reporting(E_ALL);
 $nombreBD = "videojuegos";
 include "conexion.inc";
 
+$conexion = generarConexionBBDD($nombreBD);
+
 if (isset($_POST["titulo"]) && isset($_POST["genero"]) && isset($_POST["precio"])){
 
-    $insercion = $pdo->prepare("INSERT INTO videojuegos(titulo, genero, precio)" .
+    $insercion = $conexion->prepare("INSERT INTO videojuegos(titulo, genero, precio)" .
         " VALUES(:titulo, :genero, :precio);");
     $insercion->bindParam(':titulo', $_REQUEST['titulo']);
     $insercion->bindParam(':genero', $_REQUEST['genero']);
@@ -100,13 +101,13 @@ if (isset($_POST["titulo"]) && isset($_POST["genero"]) && isset($_POST["precio"]
         $insercion = null;
     }
 } else if (isset($_POST["borrar"])){
-    $borrado = $pdo->prepare("DELETE FROM videojuegos WHERE id = :idABorrar;");
+    $borrado = $conexion->prepare("DELETE FROM videojuegos WHERE id = :idABorrar;");
     $borrado->bindParam(':idABorrar',$_POST["borrar"]);
     $borrado->execute();
     $borrado = null;
 }
 
-$consulta = $pdo->prepare("SELECT * FROM videojuegos");
+$consulta = $conexion->prepare("SELECT * FROM videojuegos");
 $consulta->execute();
 echo "<form method='POST' action='videojuegos.php'>";
 echo "<table><tr><th colspan='5'>Videojuegos</th></tr>";
@@ -123,7 +124,7 @@ while($registro = $consulta->fetch())
 }
 echo "</table></form>";
 $consulta = NULL;
-$pdo = NULL;
+$conexion = NULL;
 ?>
 </body>
 </html>
