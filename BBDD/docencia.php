@@ -24,7 +24,7 @@
         button{
             width: 100%;
         }
-        form.entrada{
+        div.entrada{
             position: absolute;
             width: 50vh;
             aspect-ratio: 1/1;
@@ -94,20 +94,24 @@ if (isset($_POST["insertar"])){
             case "profesores":
                 $borrado = $conexion->prepare("DELETE FROM profesores WHERE dni = :dni");
                 $borrado->bindParam(":dni", $datos[1]);
-                $borrado->execute();
                 break;
             case "asignaturas":
                 $borrado = $conexion->prepare("DELETE FROM asignaturas WHERE codigo = :cod");
                 $borrado->bindParam(":cod", $datos[1]);
-                $borrado->execute();
                 break;
             case "imparte":
                 $borrado = $conexion->prepare("DELETE FROM imparte WHERE dni = :dni AND asignatura = :asig");
                 $borrado->bindParam(":dni", $datos[1]);
                 $borrado->bindParam(":asig", $datos[2]);
-                $borrado->execute();
                 break;
         }
+        try{
+            $borrado->execute();
+        } catch (PDOException){
+            if ($borrado->errorCode() == "23000") echo "La entrada que has intentado borrar tiene referencias en otras 
+            tablas las cuales no permiten que se elimine.<br>Por favor deshágase de esas referencias antes de realizar esta acción.";
+        }
+
         $borrado = NULL;
     }
 
