@@ -24,12 +24,25 @@
         button{
             width: 100%;
         }
-        div.entrada{
+        div.entrada {
             position: absolute;
             width: 50vh;
             aspect-ratio: 1/1;
             left: 35%;
             background: #b8b8f3;
+        }
+        th{
+            text-transform: capitalize;
+        }
+        table button {
+            background: none;
+            width: 100%;
+            height: 100%;
+            border-radius: 0;
+            border: none;
+        }
+        td:has(button){
+            background: #ff6363;
         }
     </style>
 </head>
@@ -63,7 +76,39 @@ if (isset($_POST["insertar"])){
     echo "<input type='submit' name='modificarAcabado' value='Insertar'/>";
     echo "<input type='submit' name='tabla' value='Cancelar'/>";
     echo "</form></div>";
+} elseif (isset($_POST["modificar"])){
+    echo "<div class='entrada'><form method='post' action='modificarDocencia.php'>";
+    $conseguirValores = NULL;
+
+    switch ($_POST["modificar"]){
+        case "profesores":
+            $conseguirValores = $conexion->prepare("SELECT * FROM profesores WHERE dni = :dni");
+            $conseguirValores->bindParam(":dni", $_POST["modificar"][1]);
+            $conseguirValores->execute();
+            $conseguirValores = $conseguirValores->fetch();
+            echo "DNI: <input type='number' name='dni' pattern='[0-9]{8}' minlength='8' min='10000000' max='99999999' value='" . $conseguirValores[0] . "'/>";
+            echo "NOMBRE: <input type='text' name='nombre'/>";
+            echo "CATEGORIA: <input type='text' name='categoria'/>";
+            echo "INGRESO: <input type='date' name='ingreso'/>";
+            break;
+        case "imparte":
+            echo "DNI: <input type='number' name='dni' pattern='[0-9]{8}'/>";
+            echo "ASIGNATURA: <input type='text' name='asignatura'/>";
+            break;
+        case "asignaturas":
+            echo "CODIGO: <input type='text' name='codigo'/>";
+            echo "DESCRIPCION: <input type='text' name='descripcion'/>";
+            echo "CREDITOS: <input type='text' name='creditos'/>";
+            echo "CREDITOSP: <input type='text' name='creditosp'/>";
+            break;
+    }
+    echo "<input type='hidden' name='tabla' value='". $_POST['insertar'] . "'/>";
+    echo "<input type='submit' name='modificarAcabado' value='Insertar'/>";
+    echo "<input type='submit' name='tabla' value='Cancelar'/>";
+    echo "</form></div>";
 }
+
+
 ?>
 <h1>Base de datos docencia</h1>
 <form method="post" action="docencia.php">
@@ -116,6 +161,7 @@ if (isset($_POST["insertar"])){
     }
 
     echo "<table><tr><th colspan='6'>profesores</th></tr>";
+    echo "<tr><th>DNI</th><th>Nombre</th><th>Categoria</th><th>Ingreso</th></tr>";
 
     $obtenerProfesores = $conexion->prepare("SELECT * FROM profesores;");
     $obtenerProfesores->execute();
@@ -140,6 +186,7 @@ if (isset($_POST["insertar"])){
     $obtenerProfesores = NULL;
 
     echo "<table><tr><th colspan='6'>asignaturas</th></tr>";
+    echo "<tr><th>codigo</th><th>descripcion</th><th>creditos</th><th>creditosP</th></tr>";
 
     $obtenerAsignaturas = $conexion->prepare("SELECT * FROM asignaturas;");
     $obtenerAsignaturas->execute();
@@ -162,7 +209,8 @@ if (isset($_POST["insertar"])){
     echo "</table>";
     $obtenerAsignaturas = NULL;
 
-    echo "<table><tr><th colspan='6'>imparte</th></tr>";
+    echo "<table><tr><th colspan='4'>imparte</th></tr>";
+    echo "<tr><th>DNI</th><th>Asignatura</th></tr>";
 
     $obtenerImparte = $conexion->prepare("SELECT * FROM imparte;");
     $obtenerImparte->execute();
