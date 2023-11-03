@@ -12,6 +12,11 @@
         body{
             align-items: start;
             position: relative;
+            font-family: sans-serif;
+        }
+
+        h2{
+            font-family: cs;
         }
         form{
             display: flex;
@@ -49,6 +54,10 @@
             font-weight: bold;
         }
 
+        button:hover{
+            cursor: pointer;
+        }
+
         .insercion{
             background: darkseagreen;
 
@@ -63,7 +72,6 @@
         }
         .insercion:hover{
             background: #cdffcd;
-
         }
 
         .borrar:hover{
@@ -73,7 +81,8 @@
         .modificado:hover{
             background: #dedeff;
         }
-
+        
+        
 
 
      </style>
@@ -82,13 +91,13 @@
 <?php
 session_start();
 include "conexion.inc";
-echo $_SESSION["esAdmin"] . "(sesión)<br>";
-echo $_POST["modoAdmin"] ."(post)<br>";
 $conexion = generarConexionBBDD("docencia");
-if (isset($_POST["modoAdmin"])) $_SESSION["esAdmin"] = $_POST["modoAdmin"];
-else $_SESSION["esAdmin"] = "0";
-$modoAdmin = $_SESSION["esAdmin"];
 
+if (isset($_POST["modoAdmin"])) {
+    $_SESSION["esAdmin"] = $_POST["modoAdmin"];
+}
+
+$modoAdmin = isset($_SESSION["esAdmin"]) ? $_SESSION["esAdmin"] : "0";
 
 if (isset($_POST["insertar"])){
     echo "<div class='entrada'><form method='post' action='insertarDocencia.php'>";

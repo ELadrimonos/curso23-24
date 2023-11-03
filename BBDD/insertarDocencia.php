@@ -1,7 +1,6 @@
 <?php
 session_start();
 include "conexion.inc";
-ini_set('display_errors', 1); ini_set('display_startup_errors', 1); error_reporting(E_ALL);
 $tabla = $_POST["tabla"];
 $conexion = generarConexionBBDD("docencia");
 $insercion = NULL;
@@ -30,7 +29,19 @@ switch ($tabla) {
         header("Location:docencia.php");
         break;
 }
-$insercion->execute();
+
+try{
+    $insercion->execute();
+} catch (PDOException){
+    if ($insercion->errorCode() == "23000"){
+        echo "<b>La entrada que has intentado insertar no tiene referencias en otras 
+            tablas.<br>Por favor cree de esas referencias antes de realizar esta acción.</b>";
+        echo "<b>Volviendo en 10 segundos</b>";
+        header( "Refresh:1000; url=./docencia.php", true, 303);
+    }
+
+
+}
 $conexion = NULL;
 $insercion = NULL;
 header("Location:docencia.php");
