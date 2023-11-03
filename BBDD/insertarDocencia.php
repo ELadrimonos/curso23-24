@@ -1,7 +1,7 @@
 <?php
+session_start();
 include "conexion.inc";
 ini_set('display_errors', 1); ini_set('display_startup_errors', 1); error_reporting(E_ALL);
-session_start();
 $tabla = $_POST["tabla"];
 $conexion = generarConexionBBDD("docencia");
 $insercion = NULL;
