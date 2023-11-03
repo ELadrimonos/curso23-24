@@ -16,7 +16,7 @@
         }
 
         h2{
-            font-family: cs;
+            font-family: cs, sans-serif;
         }
         form{
             display: flex;
@@ -180,13 +180,13 @@ if (isset($_POST["insertar"])){
         <h2>Modo administración</h2>
         <label>
             <input type="radio" name="modoAdmin" value="0" onchange="this.form.submit()"
-                <?php echo ($_SESSION['esAdmin'] == "0" || $_SESSION == NULL ? "checked" : "");?>>
+                <?php echo (!$modoAdmin ? "checked" : "");?>>
             Desactivado
         </label>
 
         <label>
             <input type="radio" name="modoAdmin" value="1" onchange="this.form.submit()"
-                <?php echo ($_SESSION['esAdmin'] == "1" ? "checked" : "");?>>
+                <?php echo ($modoAdmin ? "checked" : "");?>>
             Activado
         </label>
     </div>
