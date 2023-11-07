@@ -36,11 +36,27 @@
         }
         div.entrada {
             position: absolute;
-            width: 50vh;
-            aspect-ratio: 1/1;
+            width: 25vw;
+            padding: 30px;
             left: 35%;
+            display: flex;
+            flex-direction: column;
+            justify-content: start;
+            align-items: center;
             background: #b8b8f3;
         }
+
+        .entrada > form{
+            gap: 30px;
+            align-self: center;
+            display: grid;
+            grid-template-columns: repeat(2,1fr);
+        }
+
+        .entrada > h1{
+            text-transform: uppercase;
+        }
+
         th{
             text-transform: capitalize;
         }
@@ -81,8 +97,6 @@
         .modificado:hover{
             background: #dedeff;
         }
-        
-        
 
 
      </style>
@@ -90,17 +104,19 @@
 <body>
 <?php
 session_start();
-include "conexion.inc";
+include "../conexion.inc";
+
 $conexion = generarConexionBBDD("docencia");
 
 if (isset($_POST["modoAdmin"])) {
     $_SESSION["esAdmin"] = $_POST["modoAdmin"];
 }
 
-$modoAdmin = isset($_SESSION["esAdmin"]) ? $_SESSION["esAdmin"] : "0";
+// Si session asAdmin tiene valor se le asigna este, si no pasa a la siguiente opción
+$modoAdmin = $_SESSION["esAdmin"] ?? "0";
 
 if (isset($_POST["insertar"])){
-    echo "<div class='entrada'><form method='post' action='insertarDocencia.php'>";
+    echo "<div class='entrada'><h1>".$_POST["insertar"]. "</h1><form method='post' action='insertarDocencia.php'>";
     switch ($_POST["insertar"]){
         case "profesores":
             echo "DNI: <input type='number' name='dni' pattern='[0-9]{8}' minlength='8' min='10000000' max='99999999'/>";
@@ -124,44 +140,18 @@ if (isset($_POST["insertar"])){
     echo "<input type='submit' name='tabla' value='Cancelar'/>";
     echo "</form></div>";
 } elseif (isset($_POST["modificar"])){
-    echo "<div class='entrada'><form method='post' action='modificarDocencia.php'>";
-    $conseguirValores = NULL;
     $datos = explode(",",$_POST["modificar"]);
-
+    echo "<div class='entrada'><h1>$datos[0]</h1><form method='post' action='modificarDocencia.php'>";
+    $conseguirValores = NULL;
     switch ($datos[0]){
         case "profesores":
-            $conseguirValores = $conexion->prepare("SELECT * FROM profesores WHERE dni = :dni");
-            $conseguirValores->bindParam(":dni", $datos[1]);
-            $conseguirValores->execute();
-            $conseguirValores = $conseguirValores->fetch();
-            echo "DNI: <input type='number' name='dni' pattern='[0-9]{8}' minlength='8' min='10000000' max='99999999' value='" . $conseguirValores[0] . "'/>";
-            echo "NOMBRE: <input type='text' name='nombre' value='" . $conseguirValores[1] ."'/>";
-            echo "CATEGORIA: <input type='text' name='categoria' value='" . $conseguirValores[2] ."'/>";
-            echo "INGRESO: <input type='date' name='ingreso' value='" . $conseguirValores[3] ."'/>";
-            //En caso de que se quiera modificar el DNI, tenemos esta copia para recordar cual dni es el que modificaremos
-            echo "<input type='hidden' name='dniOriginal' value='" . $conseguirValores[0] . "'/>";
+            include "form_Modificar_Profesores.php";
             break;
         case "imparte":
-            $conseguirValores = $conexion->prepare("SELECT * FROM imparte WHERE dni = :dni AND asignatura = :asig");
-            $conseguirValores->bindParam(":dni", $datos[1]);
-            $conseguirValores->bindParam(":asig", $datos[2]);
-            $conseguirValores->execute();
-            $conseguirValores = $conseguirValores->fetch();
-            echo "DNI: <input type='number' name='dni' pattern='[0-9]{8}' value='" . $datos[1] ."'/>";
-            echo "ASIGNATURA: <input type='text' name='asignatura' value='" . $datos[2] ."'/>";
-            echo "<input type='hidden' name='dniOriginal' value='" . $datos[1] . "'/>";
-            echo "<input type='hidden' name='asignaturaOriginal' value='" . $datos[2] . "'/>";
+            include "form_Modificar_Imparte.php";
             break;
         case "asignaturas":
-            $conseguirValores = $conexion->prepare("SELECT * FROM asignaturas WHERE codigo = :cod");
-            $conseguirValores->bindParam(":cod", $datos[1]);
-            $conseguirValores->execute();
-            $conseguirValores = $conseguirValores->fetch();
-            echo "CODIGO: <input type='text' name='codigo' value='" . $conseguirValores[0] ."'/>";
-            echo "DESCRIPCION: <input type='text' name='descripcion' value='" . $conseguirValores[1] ."'/>";
-            echo "CREDITOS: <input type='text' name='creditos' value='" . $conseguirValores[2] ."'/>";
-            echo "CREDITOSP: <input type='text' name='creditosp' value='" . $conseguirValores[3] ."'/>";
-            echo "<input type='hidden' name='codigoOriginal' value='" . $conseguirValores[0] . "'/>";
+            include "form_Modificar_Asignatura.php";
             break;
         default:
             print_r($_POST["modificar"]);

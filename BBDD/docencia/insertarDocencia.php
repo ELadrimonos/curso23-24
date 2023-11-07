@@ -1,6 +1,6 @@
 <?php
 session_start();
-include "conexion.inc";
+include "../conexion.inc";
 $tabla = $_POST["tabla"];
 $conexion = generarConexionBBDD("docencia");
 $insercion = NULL;
