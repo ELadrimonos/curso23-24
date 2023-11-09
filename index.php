@@ -54,6 +54,13 @@ $any = "2004";
     </article>
 
     <article>
+        <h2>Actividades BBDD</h2>
+        <p><a href="./BBDD/videojuegos.php">Videojuegos</a></p>
+        <p><a href="./BBDD/peliculas.php">Películas</a></p>
+        <p><a href="./BBDD/docencia/index.php">Docencia</a></p>
+    </article>
+
+    <article>
     <h2>Área del círculo</h2>
     <?php
         define("PI", 3.14);

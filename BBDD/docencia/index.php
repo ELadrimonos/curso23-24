@@ -139,7 +139,6 @@ if (isset($_POST["insertar"])){
 } elseif (isset($_POST["modificar"])){
     $datos = explode(",",$_POST["modificar"]);
     echo "<div class='entrada'><h1>$datos[0]</h1><form method='post' action='modificarDocencia.php'>";
-    $conseguirValores = NULL;
     switch ($datos[0]){
         case "profesores":
             include "form_Modificar_Profesores.php";
@@ -186,7 +185,7 @@ if (isset($_POST["insertar"])){
         try{
             $conexion->borrarEntrada($datos[0],$datos[1], ($datos[2] ?? null));
         } catch (PDOException $e){
-            if ($e == "23000") echo "<b>La entrada que has intentado borrar tiene referencias en otras 
+            if ($e->getCode() == "23000") echo "<b>La entrada que has intentado borrar tiene referencias en otras 
             tablas las cuales no permiten que se elimine.<br>Por favor deshágase de esas referencias antes de realizar esta acción.</b>";
         }
 

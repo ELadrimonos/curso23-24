@@ -64,7 +64,7 @@ class Docencia extends Conexion
     }
 
     public function borrarEntrada($tabla, ...$identificador){
-        try{
+
             $query = "DELETE FROM $tabla";
             switch ($tabla){
                 case "profesores":
@@ -82,14 +82,7 @@ class Docencia extends Conexion
             $registro = $this->pdo->prepare($query);
             $registro->execute();
             return $registro->fetchAll();
-        } catch (PDOException $e)
-        {
-            if ($e->getCode() === 23000)
-            echo "<b>La entrada que has intentado borrar tiene referencias en otras 
-            tablas las cuales no permiten que se elimine.<br>Por favor deshágase de esas referencias antes de realizar esta acción.</b>";
-            die($e->getMessage());
 
-        }
     }
 
     public function insertarEntrada($tabla, $valores){
@@ -118,7 +111,6 @@ class Docencia extends Conexion
     }
 
     public function modificarEntrada($tabla,$valores){
-        try{
             $query = "UPDATE $tabla SET ";
             switch ($tabla){
                 case "profesores":
@@ -146,13 +138,7 @@ class Docencia extends Conexion
             $registro = $this->pdo->prepare($query);
             $registro->execute();
             return $registro->fetchAll();
-        }  catch (PDOException $e)
-        {
-            if ($e->getCode() === 23000)
-            echo "<b>La entrada que has intentado modificar tiene referencias en otras 
-            tablas que no permiten este cambio.</b>";
-            die($e->getMessage());
-        }
+
     }
 
 }
