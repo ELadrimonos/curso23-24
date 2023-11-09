@@ -1,10 +1,13 @@
 <?php
+//
+//$conseguirValores = $conexion->prepare("SELECT * FROM imparte WHERE dni = :dni AND asignatura = :asig");
+//$conseguirValores->bindParam(":dni", $datos[1]);
+//$conseguirValores->bindParam(":asig", $datos[2]);
+//$conseguirValores->execute();
+//$conseguirValores = $conseguirValores->fetch();
 
-$conseguirValores = $conexion->prepare("SELECT * FROM imparte WHERE dni = :dni AND asignatura = :asig");
-$conseguirValores->bindParam(":dni", $datos[1]);
-$conseguirValores->bindParam(":asig", $datos[2]);
-$conseguirValores->execute();
-$conseguirValores = $conseguirValores->fetch();
+$conseguirValores = $conexion->ObtenerImparte($datos[1],$datos[2])[0];
+
 
 ?>
 DNI: <input type='number' name='dni' pattern='[0-9]{8}' minlength='8' min='10000000' max='99999999' value='<?=$datos[1]?>'/>

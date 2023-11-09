@@ -33,18 +33,18 @@ switch ($tabla) {
         $modificacion->bindParam(":credp", $_POST["creditosp"]);
         break;
     case "Cancelar":
-        header("Location:docencia.php");
+        header("Location:index.php");
         break;
     default:
         echo "ALGO SALIÓ MAL";
 }
 try{
     $modificacion->execute();
-    header("Location:docencia.php");
+    header("Location:index.php");
 
 } catch (PDOException){
     if ($modificacion->errorCode() == "23000") echo "<b>No existe una referencia de las entradas que has intentado modificar. Regresando en 5 segundos.</b>";
-    header('Refresh:5 ; URL=docencia.php');
+    header('Refresh:5 ; URL=index.php');
 } finally {
     $conexion = NULL;
     $modificacion = NULL;

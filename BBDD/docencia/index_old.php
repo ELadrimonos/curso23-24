@@ -105,12 +105,14 @@
 <?php
 session_start();
 include "../conexion.inc";
+include_once "Docencia.php";
 
-$conexion = generarConexionBBDD("docencia");
-
+//$conexion = generarConexionBBDD("docencia");
+$conexion = new Docencia("docencia");
 if (isset($_POST["modoAdmin"])) {
     $_SESSION["esAdmin"] = $_POST["modoAdmin"];
 }
+
 
 // Si session asAdmin tiene valor se le asigna este, si no pasa a la siguiente opción
 $modoAdmin = $_SESSION["esAdmin"] ?? "0";
@@ -165,7 +167,7 @@ if (isset($_POST["insertar"])){
 
 ?>
 <h1>Base de datos docencia</h1>
-<form method="post" action="docencia.php">
+<form method="post" action="index.php">
     <div>
         <h2>Modo administración</h2>
         <label>
