@@ -1,9 +1,7 @@
 <?php
 
-$conseguirValores = $conexion->prepare("SELECT * FROM asignaturas WHERE codigo = :cod");
-$conseguirValores->bindParam(":cod", $datos[1]);
-$conseguirValores->execute();
-$conseguirValores = $conseguirValores->fetch();
+$conseguirValores = $conexion->ObtenerAsignaturas($datos[1])[0];
+
 
 ?>
 CODIGO: <input type='text' name='codigo' maxlength="5" value='<?=$conseguirValores[0]?>'/>

@@ -84,8 +84,11 @@ class Docencia extends Conexion
             return $registro->fetchAll();
         } catch (PDOException $e)
         {
-           echo "<b>La entrada que has intentado borrar tiene referencias en otras 
+            if ($e->getCode() === 23000)
+            echo "<b>La entrada que has intentado borrar tiene referencias en otras 
             tablas las cuales no permiten que se elimine.<br>Por favor deshágase de esas referencias antes de realizar esta acción.</b>";
+            die($e->getMessage());
+
         }
     }
 
@@ -98,7 +101,8 @@ class Docencia extends Conexion
                     default => $valor . ", ",
                 };
             }
-            $query[-1] = "";
+            // Como después de cada entrada se agrega una coma, quito la última para que no de error
+            $query[strlen($query)-2] = " ";
             $query .= ")";
             echo $query . '<br>';
             $registro = $this->pdo->prepare($query);
@@ -106,8 +110,47 @@ class Docencia extends Conexion
             return $registro->fetchAll();
         } catch (PDOException $e)
         {
+            if ($e->getCode() === 23000)
             echo "<b>La entrada que has intentado insertar no tiene referencias en otras 
             tablas.<br>Por favor cree de esas referencias antes de realizar esta acción.</b>";
+            die($e->getMessage());
+        }
+    }
+
+    public function modificarEntrada($tabla,$valores){
+        try{
+            $query = "UPDATE $tabla SET ";
+            switch ($tabla){
+                case "profesores":
+                    $query .= "dni = $valores[0],";
+                    $query .= "nombre = '$valores[1]',";
+                    $query .= "categoria = '$valores[2]',";
+                    $query .= "ingreso = '$valores[3]' ";
+                    $query .= " WHERE dni = $valores[4]";
+                    break;
+                case "asignaturas":
+                    $query .= "codigo = '$valores[0]',";
+                    $query .= "descripcion = '$valores[1]',";
+                    $query .= "creditos = $valores[2],";
+                    $query .= "creditosp = $valores[3] ";
+                    $query .= " WHERE codigo = '$valores[4]'";
+                    break;
+                case "imparte":
+                    $query .= "dni = $valores[0],";
+                    $query .= "asignatura = '$valores[1]' ";
+                    $query .= " WHERE dni = $valores[2] AND asignatura = '$valores[3]'";
+                    break;
+                default:
+                    return "La tabla no existe";
+            }
+            $registro = $this->pdo->prepare($query);
+            $registro->execute();
+            return $registro->fetchAll();
+        }  catch (PDOException $e)
+        {
+            if ($e->getCode() === 23000)
+            echo "<b>La entrada que has intentado modificar tiene referencias en otras 
+            tablas que no permiten este cambio.</b>";
             die($e->getMessage());
         }
     }
