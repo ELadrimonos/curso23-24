@@ -1,0 +1,98 @@
+.modificar{
+    position: fixed;
+    width: 50vw;
+    margin: auto;
+    top: 20vh;
+    background: #89bcd5;
+    font-weight: bold;
+    justify-content: space-around;
+    align-items: center;
+    border-radius: 30px;
+    display: flex;
+}
+
+.modificar > form{
+    gap: 20px;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+
+}
+
+.modificar > img{
+    width: 50%;
+}
+
+.insercion{
+    width: 20vw;
+    margin: auto;
+    top: 20vh;
+    background: #ecb3c6;
+    font-weight: bold;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+    border-radius: 30px;
+}
+
+form{
+    display: flex;
+    flex-direction: column;
+    padding: 30px;
+}
+
+body{
+    gap: 30px;
+}
+
+input[type="submit"]{
+    border: 2px solid black;
+    background: #b8b8f3;
+    width: 150px;
+    aspect-ratio: 2/1;
+    transition: 300ms;
+    font-weight: bold;
+}
+input[type="submit"]:hover{
+    background: #6a6ab9;
+    border-radius: 25%/35%;
+    color: white;
+}
+label{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding: 10px;
+    background: rgba(255, 209, 209, 0.75);
+}
+table,th,td{
+    border: 2px solid black;
+    border-collapse: collapse;
+}
+td,th{
+    padding: 5px;
+}
+td.borrar{
+    padding: 0;
+    background: red;
+    width: 20px;
+}
+td.modificado{
+    padding: 0;
+    background: #65ffe2;
+    width: 20px;
+}
+button{
+    background: none;
+    border: none;
+    color: #4d0707;
+    width: 20px;
+    height: 100%;
+    margin: auto;
+}
+.borrar:hover, .borrar:active{
+    background: #ff5050;
+}
+.modificado:hover, .modificado:active{
+    background: #c3ffff;
+}

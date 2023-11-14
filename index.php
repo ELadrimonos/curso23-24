@@ -56,7 +56,7 @@ $any = "2004";
     <article>
         <h2>Actividades BBDD</h2>
         <p><a href="./BBDD/videojuegos.php">Videojuegos</a></p>
-        <p><a href="./BBDD/peliculas.php">Películas</a></p>
+        <p><a href="./BBDD/peliculas/peliculas.php">Películas</a></p>
         <p><a href="./BBDD/docencia/index.php">Docencia</a></p>
     </article>
 
