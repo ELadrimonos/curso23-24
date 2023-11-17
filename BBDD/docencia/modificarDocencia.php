@@ -17,6 +17,10 @@ try{
         case "asignaturas":
             $conexion->modificarEntrada($tabla,[strtoupper($_POST["codigo"]), strtoupper($_POST["descripcion"]), $_POST["creditos"], $_POST["creditosp"], strtoupper($_POST["asignaturaOriginal"])]);
             break;
+        case "usuarios":
+            print_r([$_POST["usuario"], (password_hash($_POST["password"], PASSWORD_DEFAULT)), $_POST["usuarioOriginal"]]);
+            $conexion->modificarEntrada($tabla,[$_POST["usuario"], (password_hash($_POST["password"], PASSWORD_DEFAULT)), $_POST["usuarioOriginal"]]);
+            break;
         case "Cancelar":
             header("Location:index.php");
             break;

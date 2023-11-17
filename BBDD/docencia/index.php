@@ -4,102 +4,7 @@
     <meta charset="UTF-8">
     <title></title>
     <link rel="stylesheet" type="text/css" href="/curso23-24/estilos/principal.css">
-    <style>
-        table, td, th{
-            border-collapse: collapse;
-            border: 3px solid black;
-        }
-        body{
-            align-items: start;
-            position: relative;
-            font-family: sans-serif;
-        }
-
-        h2{
-            font-family: cs, sans-serif;
-        }
-        form{
-            display: flex;
-            flex-direction: column;
-            gap: 50px;
-        }
-
-        tr:nth-child(-n + 2){
-            background: #c9c9c9;
-        }
-
-        table{
-            width: fit-content;
-        }
-        button{
-            width: 100%;
-        }
-        div.entrada {
-            position: absolute;
-            width: 25vw;
-            padding: 30px;
-            left: 35%;
-            display: flex;
-            flex-direction: column;
-            justify-content: start;
-            align-items: center;
-            background: #b8b8f3;
-        }
-
-        .entrada > form{
-            gap: 30px;
-            align-self: center;
-            display: grid;
-            grid-template-columns: repeat(2,1fr);
-        }
-
-        .entrada > h1{
-            text-transform: uppercase;
-        }
-
-        th{
-            text-transform: capitalize;
-        }
-        table button {
-            width: 100%;
-            height: 100%;
-            border-radius: 0;
-            border: none;
-            margin: 0;
-            background: none;
-            font-weight: bold;
-        }
-
-        button:hover{
-            cursor: pointer;
-        }
-
-        .insercion{
-            background: darkseagreen;
-
-        }
-
-        .borrar{
-            background: red;
-        }
-
-        .modificado{
-            background: #9c9ce3;
-        }
-        .insercion:hover{
-            background: #cdffcd;
-        }
-
-        .borrar:hover{
-            background: #ea7272;
-        }
-
-        .modificado:hover{
-            background: #dedeff;
-        }
-
-
-     </style>
+    <link rel="stylesheet" type="text/css" href="./estilosDocencia.css">
 </head>
 <body>
 <?php
@@ -111,9 +16,12 @@ $conexion = new Docencia("docencia");
 
 
 if (isset($_POST["modoAdmin"])) {
-    $_SESSION["esAdmin"] = $_POST["modoAdmin"];
+    if ($_POST["modoAdmin"] == 1 && $_SESSION["esAdmin"] == 0){
+        header("Location:form_Iniciar_Sesion.php");
+    } else{
+        $_SESSION["esAdmin"] = $_POST["modoAdmin"];
+    }
 }
-
 
 // Si session asAdmin tiene valor se le asigna este, si no pasa a la siguiente opción
 $modoAdmin = $_SESSION["esAdmin"] ?? "0";
@@ -129,6 +37,9 @@ if (isset($_POST["insertar"])){
             break;
         case "asignaturas":
             include "form_Insertar_Asignatura.php";
+            break;
+        case "usuarios":
+            include "form_Insertar_Usuarios.php";
             break;
     }
     echo "<input type='hidden' name='tabla' value='". $_POST['insertar'] . "'/>";
@@ -148,6 +59,9 @@ if (isset($_POST["insertar"])){
             break;
         case "asignaturas":
             include "form_Modificar_Asignatura.php";
+            break;
+        case "usuarios":
+            include "form_Modificar_Usuarios.php";
             break;
         default:
             print_r($_POST["modificar"]);
@@ -192,8 +106,12 @@ if (isset($_POST["insertar"])){
         $borrado = NULL;
     }
 
-    echo "<table><tr><th colspan='6'>profesores</th></tr>";
-    echo "<tr><th>DNI</th><th>Nombre</th><th>Categoría</th><th>Ingreso</th>";
+    if ($modoAdmin) include_once "listarUsuarios.php";
+
+    echo "<table><tr class='gris'><th colspan='6'>profesores</th></tr>";
+    if ($modoAdmin)
+        echo "<tr><td colspan='6' class='insercion'><button type='submit' name='insertar' value='profesores'>Insertar</button></td></tr>";
+    echo "<tr class='gris'><th>DNI</th><th>Nombre</th><th>Categoría</th><th>Ingreso</th>";
 
     if ($modoAdmin) echo "<th colspan='2'></th>";
     echo "</tr>";
@@ -213,13 +131,14 @@ if (isset($_POST["insertar"])){
         echo "<tr>";
     }
 
-    if ($modoAdmin)
-    echo "<tr><td colspan='6' class='insercion'><button type='submit' name='insertar' value='profesores'>Insertar</button></td></tr>";
+
     echo "</table>";
 
 
-    echo "<table><tr><th colspan='6'>asignaturas</th></tr>";
-    echo "<tr><th>codigo</th><th>descripcion</th><th>creditos</th><th>creditosP</th>";
+    echo "<table><tr class='gris'><th colspan='6'>asignaturas</th></tr>";
+    if ($modoAdmin)
+        echo "<tr><td colspan='6' class='insercion'><button type='submit' name='insertar' value='asignaturas'>Insertar</button></td></tr>";
+    echo "<tr class='gris'><th>codigo</th><th>descripcion</th><th>creditos</th><th>creditosP</th>";
 
     if ($modoAdmin) echo "<th colspan='2'></th>";
     echo "</tr>";
@@ -238,13 +157,14 @@ if (isset($_POST["insertar"])){
         }
         echo "<tr>";
     }
-    if ($modoAdmin)
-    echo "<tr><td colspan='6' class='insercion'><button type='submit' name='insertar' value='asignaturas'>Insertar</button></td></tr>";
+
     echo "</table>";
 
 
-    echo "<table><tr><th colspan='4'>imparte</th></tr>";
-    echo "<tr><th>DNI</th><th>Asignatura</th>";
+    echo "<table><tr class='gris'><th colspan='4'>imparte</th></tr>";
+    if ($modoAdmin)
+        echo "<tr><td colspan='4' class='insercion'><button type='submit' name='insertar' value='imparte'>Insertar</button></td></tr>";
+    echo "<tr class='gris'><th>DNI</th><th>Asignatura</th>";
     if ($modoAdmin) echo "<th colspan='2'></th>";
     echo "</tr>";
 
@@ -260,8 +180,7 @@ if (isset($_POST["insertar"])){
         }
         echo "<tr>";
     }
-    if ($modoAdmin)
-    echo "<tr><td colspan='4' class='insercion'><button type='submit' name='insertar' value='imparte'>Insertar</button></td></tr>";
+
     echo "</table>";
 
     $conexion = NULL;

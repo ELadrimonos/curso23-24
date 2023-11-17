@@ -15,6 +15,8 @@ switch ($tabla) {
     case "asignaturas":
         $conexion->insertarEntrada($tabla, [$_POST["codigo"],$_POST["descripcion"], $_POST["creditos"],$_POST["creditosp"]]);
         break;
+    case "usuarios":
+        $conexion->insertarEntrada($tabla,[$_POST["usuario"],password_hash($_POST["password"], PASSWORD_DEFAULT)]);
     case "Cancelar":
         header("Location:index.php");
         break;

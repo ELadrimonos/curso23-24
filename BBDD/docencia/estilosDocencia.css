@@ -1,0 +1,92 @@
+table, td, th{
+    border-collapse: collapse;
+    border: 3px solid black;
+}
+body{
+    align-items: start;
+    position: relative;
+    font-family: sans-serif;
+}
+
+h2{
+    font-family: cs, sans-serif;
+}
+form{
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+}
+
+tr.gris{
+    background: #c9c9c9;
+}
+
+table{
+    width: fit-content;
+}
+button{
+    width: 100%;
+}
+div.entrada {
+    position: absolute;
+    width: 25vw;
+    padding: 30px;
+    left: 35%;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+    background: #b8b8f3;
+}
+
+.entrada > form{
+    gap: 30px;
+    align-self: center;
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+}
+
+.entrada > h1{
+    text-transform: uppercase;
+}
+
+th{
+    text-transform: capitalize;
+}
+table button {
+    width: 100%;
+    height: 100%;
+    border-radius: 0;
+    border: none;
+    margin: 0;
+    background: none;
+    font-weight: bold;
+}
+
+button:hover{
+    cursor: pointer;
+}
+
+.insercion{
+    background: darkseagreen;
+
+}
+
+.borrar{
+    background: red;
+}
+
+.modificado{
+    background: #9c9ce3;
+}
+.insercion:hover{
+    background: #cdffcd;
+}
+
+.borrar:hover{
+    background: #ea7272;
+}
+
+.modificado:hover{
+    background: #dedeff;
+}

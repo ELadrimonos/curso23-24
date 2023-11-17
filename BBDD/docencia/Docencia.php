@@ -11,6 +11,14 @@ class Docencia extends Conexion
     {
         parent::__construct($nombreBD);
         $this->pdo=parent::conectar();
+        $this->ComprobarUsuarioAdmin();
+    }
+
+    private function ComprobarUsuarioAdmin(){
+        if (count($this->ObtenerUsuarios()) === 0){
+            $this->insertarEntrada("usuarios",["admin",password_hash("admin", PASSWORD_DEFAULT)]);
+            echo "<b>Debe haber al menos un usuario para no perder acceso en caso de cerrar sesión.<br>Creado usuario admin:admin.</b>";
+        }
     }
 
     public function ObtenerProfes($modificar = 0)
@@ -28,7 +36,20 @@ class Docencia extends Conexion
         }
     }
 
-
+    public function ObtenerUsuarios($modificar = 0)
+    {
+        try{
+            $query = "SELECT * FROM usuarios";
+            if ($modificar !== 0) $query .= " WHERE usuario = :usu";
+            $registro = $this->pdo->prepare($query);
+            if ($modificar !== 0) $registro->bindParam(":usu", $modificar);
+            $registro->execute();
+            return $registro->fetchAll();
+        }catch (PDOException $e)
+        {
+            die($e->getMessage());
+        }
+    }
 
     public function ObtenerAsignaturas($modificar = 0)
     {
@@ -76,11 +97,15 @@ class Docencia extends Conexion
                 case "imparte":
                     $query .= " WHERE dni = $identificador[0] AND asignatura = '$identificador[1]'";
                     break;
+                case "usuarios":
+                    $query .= " WHERE usuario = '$identificador[0]'";
+                    break;
                 default:
                     return "No está bien definido el nombre de la tabla";
             }
             $registro = $this->pdo->prepare($query);
             $registro->execute();
+            $this->ComprobarUsuarioAdmin();
             return $registro->fetchAll();
 
     }
@@ -132,12 +157,27 @@ class Docencia extends Conexion
                     $query .= "asignatura = '$valores[1]' ";
                     $query .= " WHERE dni = $valores[2] AND asignatura = '$valores[3]'";
                     break;
+                case "usuarios":
+                    $query .= "usuario = '$valores[0]',";
+                    $query .= "password = '$valores[1]' ";
+                    $query .= " WHERE usuario = '$valores[2]'";
+                    break;
                 default:
                     return "La tabla no existe";
             }
             $registro = $this->pdo->prepare($query);
             $registro->execute();
             return $registro->fetchAll();
+    }
+
+    public function ComprobarInicioSesion($usu, $password)
+    {
+        $query = "select * from usuarios where usuario = :usu";
+        $sentencia = $this->pdo->prepare($query);
+        $sentencia->bindParam(":usu",$usu);
+        $sentencia -> execute();
+        $usuario = $sentencia -> fetch();
+        return password_verify($password, $usuario['password']);
 
     }
 
