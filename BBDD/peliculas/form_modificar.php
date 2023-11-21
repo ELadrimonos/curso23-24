@@ -13,7 +13,7 @@ $entrada = $seleccion->fetch();
         <input type='hidden' name='ficheroAntiguo' value='<?= $entrada["caratula"] ?>'/>
         AÑO: <input type='text' name='any' value='<?= $entrada["Any"] ?>'/>
         PRECIO: <input type='number' name='precio' value='<?= $entrada["Precio"] ?>'/>
-        <input type='hidden' name='id' value='" . $_POST["modificar"] ?>'/>
+        <input type='hidden' name='id' value='<?=$_POST["modificar"] ?>' />
         <input type='submit' name='modificarAcabado' value='Actualizar'/>
         <input type='submit' value='Cancelar'/>
         </form></div>
