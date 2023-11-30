@@ -104,9 +104,9 @@ if (isset($_POST["borrar"])){
 
 $consulta = $conexion->prepare("SELECT * FROM video");
 $consulta->execute();
-echo "<form method='POST' action='peliculas.php'>";
-echo "<table><tr><th colspan='7'>Peliculas</th></tr>";
-echo "<tr><th>ID</th><th>Titulo</th><th>Genero</th><th>Año</th><th>Precio</th></tr>";
+echo "<form method='POST' action='peliculas.php' id='tabla'>";
+echo "<table><thead><tr><th colspan='7'>Peliculas</th></tr>";
+echo "<tr><th>ID</th><th>Titulo</th><th>Genero</th><th>Año</th><th>Precio</th><th colspan='2'>Acciones</th></tr></thead><tbody>";
 while($registro = $consulta->fetch())
 {
     echo "<tr>";
@@ -115,11 +115,11 @@ while($registro = $consulta->fetch())
     echo "<td>" . $registro["Genero"] . "</td>";
     echo "<td>" . $registro["Any"] . "</td>";
     echo "<td>" . $registro["Precio"] . "€</td>";
-    echo "<td class='borrar'><button type='submit' name='borrar' value='" . $registro["id"] . "'>X</button></td>";
-    echo "<td class='modificado'><button type='submit' name='modificar' value='" . $registro["id"] . "'>?</button></td>";
-    echo "<tr>";
+    echo "<td class='borrar'><button type='submit' name='borrar' value='" . $registro["id"] . "'>Borrar</button></td>";
+    echo "<td class='modificado'><button type='submit' name='modificar' value='" . $registro["id"] . "'>Modificar</button></td>";
+    echo "</tr>";
 }
-echo "</table></form>";
+echo "</tbody></table></form>";
 $consulta = NULL;
 $conexion = NULL;
 

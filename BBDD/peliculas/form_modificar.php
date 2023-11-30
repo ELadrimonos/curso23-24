@@ -16,4 +16,5 @@ $entrada = $seleccion->fetch();
         <input type='hidden' name='id' value='<?=$_POST["modificar"] ?>' />
         <input type='submit' name='modificarAcabado' value='Actualizar'/>
         <input type='submit' value='Cancelar'/>
-        </form></div>
+    </form>
+</div>

@@ -1,38 +1,48 @@
 .modificar{
     position: fixed;
-    width: 50vw;
-    margin: auto;
-    top: 20vh;
-    background: #89bcd5;
+    width: 35vw;
+    left: 1vw;
+    z-index: 500;
+    top: 15vh;
+    padding: 15px;
+    background: #ffffff;
+    outline: 5px solid black;
     font-weight: bold;
     justify-content: space-around;
     align-items: center;
-    border-radius: 30px;
     display: flex;
+    flex-direction: column;
 }
 
 .modificar > form{
     gap: 20px;
     align-items: center;
     justify-content: center;
-    display: flex;
-
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    justify-items: center;
 }
 
 .modificar > img{
     width: 50%;
 }
 
+.modificar input[type="text"]{
+    width: 100%;
+}
+
 .insercion{
     width: 20vw;
-    margin: auto;
-    top: 20vh;
-    background: #ecb3c6;
+    aspect-ratio: 1/1;
+    margin-left: auto;
+    background: #cbcbcb;
     font-weight: bold;
     gap: 20px;
-    justify-content: center;
     align-items: center;
-    border-radius: 30px;
+    align-self: flex-start;
+    position: fixed;
+    top: calc(50% - 20vh);
+    left: calc(25% - 20vw);
 }
 
 form{
@@ -41,29 +51,49 @@ form{
     padding: 30px;
 }
 
-body{
-    gap: 30px;
+#tabla{
+    position: absolute;
+    top: 10px;
+    right: 50px;
 }
 
 input[type="submit"]{
     border: 2px solid black;
-    background: #b8b8f3;
+    background: #a99c9c;
     width: 150px;
     aspect-ratio: 2/1;
     transition: 300ms;
     font-weight: bold;
+    cursor: pointer;
 }
+
 input[type="submit"]:hover{
-    background: #6a6ab9;
-    border-radius: 25%/35%;
+    background: #918e8e;
+    border-radius: 5px;
     color: white;
 }
+
+input[type="file"]{
+    background: #3d3d3d;
+    color: white;
+    cursor: pointer;
+    display: flex;
+    padding: 5px;
+}
+input[type="file"]::file-selector-button{
+    background: #ffffff;
+    border: 2px dashed black;
+    font-weight: bold;
+    padding: 5px;
+}
+
+
 label{
     display: flex;
     justify-content: space-between;
     width: 100%;
     padding: 10px;
-    background: rgba(255, 209, 209, 0.75);
+    background: rgba(227, 227, 227, 0.75);
 }
 table,th,td{
     border: 2px solid black;
@@ -75,20 +105,37 @@ td,th{
 td.borrar{
     padding: 0;
     background: red;
-    width: 20px;
 }
 td.modificado{
     padding: 0;
     background: #65ffe2;
-    width: 20px;
 }
+
+thead > tr:first-child{
+    font-size: 2rem;
+}
+
+thead > tr{
+    font-size: 1.3em;
+}
+
+td{
+    font-family: Arial, sans-serif;
+}
+
+td:first-child{
+    text-align: center;
+    font-weight: bold;
+}
+
 button{
     background: none;
     border: none;
     color: #4d0707;
-    width: 20px;
     height: 100%;
     margin: auto;
+    font-weight: bold;
+    cursor: pointer;
 }
 .borrar:hover, .borrar:active{
     background: #ff5050;
