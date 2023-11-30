@@ -18,6 +18,10 @@ $any = "2004";
 </header>
 <section>
     <article>
+        <h2>Conversor png a ASCII</h2>
+        <p><a href="./ArteASCII/bitmap.php">Entrar</a></p>
+    </article>
+    <article>
         <h2>Actividades Principio</h2>
         <p><a href="tablasmultiplicacion.php">Tablas de Multiplicación</a></p>
         <p><a href="primos.php">Numeros Primos</a></p>
