@@ -5,14 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Image to Text Converter</title>
     <style>
-
+        form{
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            align-items: start;
+            justify-content: start;
+        }
     </style>
 </head>
 <body>
 
 <form method="post" action="bitmap.php" enctype="multipart/form-data">
-    <input type="file" name="archivo">
-    <input type="submit" name="enviar" value="enviar">
+    <input type="file" name="archivo" required>
+    <label>Pixeles a contar
+        <input type="number" name="pixeles" min="1" required value="4">
+    </label>
+    <input type="submit" name="enviar" value="Enviar">
 </form>
 <br><br><br>
 <pre>
@@ -31,8 +40,8 @@ if (isset($_POST["enviar"])) {
     $width = imagesx($img); //ancho
     $height = imagesy($img); //alto
 
-    for ($pixelVertical = 0; $pixelVertical < $height; $pixelVertical += 4) {
-        for ($pixelHorizontal = 0; $pixelHorizontal < $width; $pixelHorizontal += 4) {
+    for ($pixelVertical = 0; $pixelVertical < $height; $pixelVertical += $_POST["pixeles"]) {
+        for ($pixelHorizontal = 0; $pixelHorizontal < $width; $pixelHorizontal += $_POST["pixeles"]) {
             $rgb = imagecolorat($img, $pixelHorizontal, $pixelVertical);
             //Valor de las componentes RGB de cada pixel
             $rojo = $rgb >> 16;
@@ -60,8 +69,8 @@ if (isset($_POST["enviar"])) {
             } else{
                 $caracterActual = "#";
             }
-
-            echo $caracterActual;
+            $color = "color: rgb($rojo,$verde,$azul)";
+            echo "<span style='" . $color ."'>" . $caracterActual . "</span>";
             fwrite($fp, $caracterActual);
 
             //Elegir el caracter según la luminosidad del pixel y escribir en el fichero
