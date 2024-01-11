@@ -31,7 +31,7 @@ Route::get('catalog', function () {
 
 
 // Quitando el valor por defecto de id, la pagina tiraria un error
-Route::get('catalog/show/{id?}', function ($id="?") {
+Route::get('catalog/show/{id?}', function ($id) {
     return 'vista detalle película ' . $id;
 });
 
